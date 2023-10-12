@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@JsonIgnore
 	private Integer categoryId;
 	@Column(unique = true)
 	private String categoryName;

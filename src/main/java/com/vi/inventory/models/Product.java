@@ -1,11 +1,6 @@
 package com.vi.inventory.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,12 +11,12 @@ public class Product {
 	private Integer productId;
 	private String productName;
 	private Double price;
-	@ManyToOne()
+	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "seller_id", referencedColumnName = "userId", updatable = false)
 	@JsonIgnore
 	private User seller;
 
-	@ManyToOne()
+	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "category_id", referencedColumnName = "categoryId")
 	private Category category;
 
@@ -74,7 +69,7 @@ public class Product {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory() {
 		this.category = category;
 	}
 

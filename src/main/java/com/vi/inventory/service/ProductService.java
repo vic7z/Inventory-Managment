@@ -15,11 +15,13 @@ public class ProductService {
     private ProductRepo productRepo;
 
     public List<Product> getProductByKeyword(String keyword){
-        List<Product> products=productRepo.findAll();
-        return products.stream()
-                .filter(i->i.getProductName().toLowerCase().contains(keyword.toLowerCase())
-                        || i.getCategory().getCategoryName().toLowerCase().contains(keyword.toLowerCase()))
-                .collect(Collectors.toList());
+//        List<Product> products=productRepo.findAll();
+//        return products.stream()
+//                .filter(i->i.getProductName().toLowerCase().contains(keyword.toLowerCase())
+//                        || i.getCategory().getCategoryName().toLowerCase().contains(keyword.toLowerCase()))
+//                .collect(Collectors.toList());
+
+        return productRepo.findByProductNameContainingIgnoreCaseOrCategoryCategoryNameContainingIgnoreCase(keyword,keyword);
     }
 
 

@@ -33,8 +33,15 @@ public class ConsumerController {
 	@PostMapping("/cart")
 	@PreAuthorize("hasAnyRole('CONSUMER')")
 	public ResponseEntity<Object> postCart(@RequestBody Product product) {
-		  productRepo.save(product);
-		 return ResponseEntity.ok().build();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		String username = userDetails.getUsername();
+		boolean b=this.userService.addProduct(product,username);
+		if (b){
+			return ResponseEntity.ok().build();
+		}else {
+			return ResponseEntity.status(409).build();
+		}
 	}
 
 	@PutMapping("/cart")
